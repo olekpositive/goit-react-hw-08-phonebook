@@ -1,51 +1,53 @@
+import { Form, Field, ErrorMessage } from 'formik';
 import styled from '@emotion/styled';
 
-export const Contacts = styled.ul`
+export const Container = styled(Form)`
   margin: 0 auto;
-  max-width: 90%;
+  margin-bottom: 20px;
+  padding: 20px;
+  max-width: 50%;
+`;
+
+export const Wrapper = styled.div`
+  margin-bottom: 30px;
+  max-width: 100%;
+
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 15px;
-`;
-
-export const ContactsItem = styled.li`
-  padding: 10px;
-
-  display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 30px;
-
-  box-shadow: var(--main-shadow);
-  border-radius: 5px;
 `;
 
-export const Name = styled.span`
-  text-align: left;
-  font-size: 22px;
-  color: var(--primary);
-  text-shadow: var(--main-shadow);
-
-  flex-basis: 33.333%;
-`;
-
-export const Number = styled.span`
-  text-align: right;
-
+export const Label = styled.label`
+  margin-bottom: 10px;
   font-weight: 500;
-  font-size: 22px;
-  color: var(--accent);
+  font-size: 24px;
+  color: var(--secondary);
   text-shadow: var(--main-shadow);
-  flex-basis: 33.333%;
+`;
+
+export const Input = styled(Field)`
+  padding: 5px 10px;
+  width: 100%;
+
+  font-size: 24px;
+  color: var(--primary);
+
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+  box-shadow: var(--inset-shadow);
+`;
+
+export const ErrorMsg = styled(ErrorMessage)`
+  margin-top: 7px;
+  color: red;
 `;
 
 export const Btn = styled.button`
-  /* max-width: 100px; */
-  padding: 5px 15px;
-  flex-basis: 15%;
+  padding: 10px 25px;
 
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 500;
   color: var(--accent);
 
