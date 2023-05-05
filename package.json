@@ -2,7 +2,7 @@
   "name": "react-homework-template",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://olekpositive.github.io/goit-react-hw-07-phonebook/",
+  "homepage": "https://olekpositive.github.io/goit-react-hw-08-phonebook/",
   "dependencies": {
     "@emotion/styled": "^11.10.6",
     "@reduxjs/toolkit": "^1.9.3",
@@ -15,7 +15,9 @@
     "prop-types": "^15.8.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-icons": "^4.8.0",
     "react-redux": "^8.0.5",
+    "react-router-dom": "^6.10.0",
     "react-scripts": "^5.0.1",
     "react-toastify": "^9.1.2",
     "redux-persist": "^6.0.0",

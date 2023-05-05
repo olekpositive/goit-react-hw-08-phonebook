@@ -1,43 +1,38 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getContacts } from '../redux/selectors';
-import { addContact } from '../redux/contactsApi';
+import { selectContacts } from 'redux/contacts/selectors';
+import { addContact } from 'redux/contacts/operations';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
-import * as Yup from 'yup';
+import { contactSchema } from 'schemas/ContactSchema';
 import { Formik } from 'formik';
 import { customAlphabet } from 'nanoid';
 import {
-  Container,
+  FormContainer,
   Input,
   Label,
-  Wrapper,
+  InputWrapper,
   ErrorMsg,
   Btn,
 } from './ContactForm.styled';
 
 const nanoid = customAlphabet('1234567890', 3);
 
-const schema = Yup.object().shape({
-  name: Yup.string().min(2).max(70).required(),
-  phone: Yup.number().min(4).required(),
-});
-
 const initialValues = {
   id: '',
   name: '',
-  phone: '',
+  number: '',
 };
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   const handleSubmit = (values, { resetForm }) => {
     const newContact = {
       id: 'id-' + nanoid(),
       name: values.name,
-      phone: values.phone,
+      number: values.number,
     };
 
     if (contacts.find(contact => contact.name === newContact.name)) {
@@ -53,23 +48,39 @@ export const ContactForm = () => {
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
-        validationSchema={schema}
+        validationSchema={contactSchema}
       >
-        <Container>
-          <Wrapper>
-            <Label htmlFor="name">Name:</Label>
-            <Input name="name" type="text" id="name" />
-            <ErrorMsg name="name" component="div" />
-          </Wrapper>
+        {({ errors, touched }) => (
+          <FormContainer>
+            <InputWrapper>
+              <Label htmlFor="name">Name:</Label>
+              <Input
+                name="name"
+                type="text"
+                id="name"
+                autoComplete="off"
+                placeholder={' '}
+                data-error={errors.name && touched.name ? true : false}
+              />
+              <ErrorMsg name="name" component="span" />
+            </InputWrapper>
 
-          <Wrapper>
-            <Label htmlFor="phone">Number:</Label>
-            <Input name="phone" type="tel" id="phone" />
-            <ErrorMsg name="phone" component="div" />
-          </Wrapper>
+            <InputWrapper>
+              <Label htmlFor="number">Number:</Label>
+              <Input
+                name="number"
+                type="text"
+                id="number"
+                autoComplete="off"
+                placeholder={' '}
+                data-error={errors.number && touched.number ? true : false}
+              />
+              <ErrorMsg name="number" component="span" />
+            </InputWrapper>
 
-          <Btn type="submit">Add contact</Btn>
-        </Container>
+            <Btn type="submit">Done</Btn>
+          </FormContainer>
+        )}
       </Formik>
       <ToastContainer />
     </>
